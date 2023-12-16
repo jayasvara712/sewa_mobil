@@ -59,6 +59,7 @@ class PeminjamanController extends Controller
         Mobil::where('id_mobil', $mobil->id_mobil)
             ->update(['status_mobil'=>'Tidak Tersedia']);
 
+
         return redirect('/user/peminjaman')->with('success', 'Berhasil Meminjam Mobil!');
     }
 

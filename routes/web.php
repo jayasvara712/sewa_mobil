@@ -28,7 +28,7 @@ Route::resource('/admin/pengembalian', PengembalianController::class)->middlewar
 
 // Hlaman User
 // Route::get('/home', [DashboardController::class, 'home'])->middleware('user');
-// Route::get('/user', [DashboardController::class,'home'])->middleware('user');
+Route::get('/user', [DashboardController::class,'home'])->middleware('user');
 Route::get('/user/sewa', [PeminjamanController::class,'home'])->middleware('user');
 Route::resource('/user/peminjaman', PeminjamanController::class)->middleware('user');
 Route::resource('/user/pengembalian', PengembalianController::class)->middleware('user');

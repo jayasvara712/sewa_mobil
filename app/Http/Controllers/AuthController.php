@@ -51,7 +51,11 @@ class AuthController extends Controller
 
         if (Auth::attempt($cerdentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/')->with('success', 'Login Berhasil, Selamat Datang!');
+            if(auth()->user()->role == 'admin'){
+                return redirect()->intended('/')->with('success', 'Login Berhasil, Selamat Datang!');
+            }else if(auth()->user()->role == 'user'){
+                return redirect()->intended('/user')->with('success', 'Login Berhasil, Selamat Datang!');
+            }
         }
         return back()->with('errors', 'Login Gagal, Email atau Password Salah!');
     }

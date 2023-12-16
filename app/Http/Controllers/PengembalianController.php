@@ -97,6 +97,9 @@ class PengembalianController extends Controller
 
         Pengembalian::create($validateData);
 
+        Mobil::where('id_mobil', $request->id_mobil)
+            ->update(['status_mobil'=>'Tersedia']);
+
         return redirect('/user/pengembalian')->with('success', 'Mobil Berhasil dikembalikan!');
     }
 
