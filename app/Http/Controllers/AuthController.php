@@ -27,13 +27,13 @@ class AuthController extends Controller
     public function registerProcess(Request $request)
     {
         $validateData = $request->validate([
-            'email'   => 'required|max:255',
-            'username'   => 'required|max:255',
+            'email'   => 'required|unique:users|max:255',
+            'username'   => 'required|unique:users|max:255',
             'password' => 'required|max:255',
             'nama'   => 'required|max:255',
             'alamat'   => 'required|max:255',
             'no_telp'   => 'required|max:255',
-            'no_sim'   => 'required|max:255',
+            'no_sim'   => 'required|unique:users|max:255',
             'role'   => 'required|max:255',
         ]);
 
@@ -44,7 +44,7 @@ class AuthController extends Controller
         User::where('id_user', $user->id_user)
             ->update(['password'=>$password]);
 
-        return redirect('/')->with('success', 'Berhasil Mendaftar!');
+        return redirect('/login')->with('success', 'Berhasil Mendaftar!');
     }
 
     public function authenticate(Request $request)

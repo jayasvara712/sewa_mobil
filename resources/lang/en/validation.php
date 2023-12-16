@@ -157,6 +157,18 @@ return [
         'status_mobil' => [
             'required' => 'Status mobil tidak boleh kosong!',
         ],
+        'email' => [
+            'required' => 'Email tidak boleh kosong!',
+            'unique' => 'Email sudah terdaftar',
+        ],
+        'username' => [
+            'required' => 'Username tidak boleh kosong!',
+            'unique' => 'Username sudah terdaftar',
+        ],
+        'no_sim' => [
+            'required' => 'No Sim tidak boleh kosong!',
+            'unique' => 'No Sim sudah terdaftar',
+        ],
     ],
 
     /*
