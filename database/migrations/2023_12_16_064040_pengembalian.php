@@ -15,9 +15,10 @@ class Pengembalian extends Migration
     {
         Schema::create('pengembalian', function (Blueprint $table) {
             $table->id('id_pengembalian');
-            $table->foreignId('id_user')->constrained('user', 'id_user')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('id_user')->constrained('users', 'id_user')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('id_mobil')->constrained('mobil', 'id_mobil')->onUpdate('cascade')->onDelete('cascade');
             $table->date('tgl_pengembalian');
+            $table->integer('total_bayar');
             $table->timestamps();
         });
     }

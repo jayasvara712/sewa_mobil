@@ -15,7 +15,7 @@ class Peminjaman extends Migration
     {
         Schema::create('peminjaman', function (Blueprint $table) {
             $table->id('id_peminjaman');
-            $table->foreignId('id_user')->constrained('user', 'id_user')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('id_user')->constrained('users', 'id_user')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('id_mobil')->constrained('mobil', 'id_mobil')->onUpdate('cascade')->onDelete('cascade');
             $table->date('tgl_mulai_peminjaman');
             $table->date('tgl_selesai_peminjaman');

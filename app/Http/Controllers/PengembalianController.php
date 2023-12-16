@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Peminjaman;
 use App\Models\Pengembalian;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,18 @@ class PengembalianController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+        if ($user->role=='admin') {
+            return view('admin.pengembalian.index', [
+                'title' => 'pengembalian',
+                'pengembalian' => Pengembalian::with('user', 'mobil')->get()->sortBy('tgl_pengembalian')
+            ]);
+        }else{
+            return view('user.pengembalian.index', [
+                'title' => 'pengembalian',
+                'pengembalian' => Pengembalian::with('user', 'mobil')->where('id_user',$user->id_user )->get()->sortBy('tgl_pengembalian')
+            ]);
+        }
     }
 
     /**
@@ -24,7 +36,17 @@ class PengembalianController extends Controller
      */
     public function create()
     {
-        //
+        $fdate = $request->Fdate;
+        $tdate = $request->Tdate;
+        $datetime1 = new DateTime($fdate);
+        $datetime2 = new DateTime($tdate);
+        $interval = $datetime1->diff($datetime2);
+        $days = $interval->format('%a');//now do whatever you like with $days
+        $date = date('d-m-Y');
+        return view('user.pengembalian.create', [
+            'title' => 'pengembalian',
+            'date'  => $date,
+        ]);
     }
 
     /**

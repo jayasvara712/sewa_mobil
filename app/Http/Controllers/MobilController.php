@@ -14,7 +14,10 @@ class MobilController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.mobil.index', [
+            'title' => 'mobil',
+            'mobil' => Mobil::all()->sortBy('merek_mobil')
+        ]);
     }
 
     /**
@@ -24,7 +27,9 @@ class MobilController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.mobil.create', [
+            'title' => 'mobil',
+        ]);
     }
 
     /**
@@ -35,7 +40,17 @@ class MobilController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'merek_mobil'   => 'required|max:255',
+            'model_mobil'   => 'required|max:255',
+            'no_plat_mobil' => 'required|max:255',
+            'tarif_mobil'   => 'required|max:255',
+            'status_mobil'   => 'required|max:255',
+        ]);
+
+        Mobil::create($validateData);
+
+        return redirect('/admin/mobil')->with('success', 'Data Mobil Berhasil Di Simpan!');
     }
 
     /**
@@ -44,7 +59,7 @@ class MobilController extends Controller
      * @param  \App\Models\Mobil  $mobil
      * @return \Illuminate\Http\Response
      */
-    public function show(Mobil $mobil)
+    public function show($id)
     {
         //
     }
@@ -55,9 +70,13 @@ class MobilController extends Controller
      * @param  \App\Models\Mobil  $mobil
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mobil $mobil)
+    public function edit($id)
     {
-        //
+        $mobil = Mobil::findOrFail($id);
+        return view('admin.mobil.edit', [
+            'title' => 'mobil',
+            'mobil' => $mobil
+        ]);
     }
 
     /**
@@ -67,9 +86,21 @@ class MobilController extends Controller
      * @param  \App\Models\Mobil  $mobil
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mobil $mobil)
+    public function update(Request $request, $id)
     {
-        //
+        $mobil = Mobil::findOrFail($id);
+        $validateData = $request->validate([
+            'merek_mobil'   => 'required|max:255',
+            'model_mobil'   => 'required|max:255',
+            'no_plat_mobil' => 'required|max:255',
+            'tarif_mobil'   => 'required|max:255',
+            'status_mobil'   => 'required|max:255',
+        ]);
+
+        Mobil::where('id_mobil', $mobil->id_mobil)
+            ->update($validateData);
+
+        return redirect('/admin/mobil')->with('success', 'Data Mobil Berhasil Di Ubah!');
     }
 
     /**
@@ -78,8 +109,22 @@ class MobilController extends Controller
      * @param  \App\Models\Mobil  $mobil
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mobil $mobil)
+    public function destroy($id)
     {
-        //
+        $res_code = 500; //500 for internal error
+        $err_msg = "";
+        $result_msg = "";
+        try {
+            $mobil = Mobil::findOrFail($id);
+            Mobil::destroy($mobil->id_mobil);
+
+            $result_msg = "Data Mobil Berhasil Di Hapus!";
+            $res_code = 200; //return 200 for OK
+        } catch (\Exception $e) {
+            $res_code = 500;
+            $err_msg = $e->getMessage();
+        }
+
+        return response()->json(['result' => $result_msg, 'response_code' => $res_code, 'error_message' => $err_msg]);
     }
 }

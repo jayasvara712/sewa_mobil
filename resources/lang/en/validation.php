@@ -142,8 +142,20 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'merek_mobil' => [
+            'required' => 'Merek mobil tidak boleh kosong!',
+        ],
+        'model_mobil' => [
+            'required' => 'Model mobil tidak boleh kosong!',
+        ],
+        'no_plat_mobil' => [
+            'required' => 'Plat no mobil tidak boleh kosong!',
+        ],
+        'tarif_mobil' => [
+            'required' => 'Tarif harian mobil tidak boleh kosong!',
+        ],
+        'status_mobil' => [
+            'required' => 'Status mobil tidak boleh kosong!',
         ],
     ],
 

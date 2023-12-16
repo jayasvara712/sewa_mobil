@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Peminjaman;
+use App\Models\Mobil;
 use Illuminate\Http\Request;
 
 class PeminjamanController extends Controller
@@ -14,7 +15,18 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+        if ($user->role=='admin') {
+            return view('admin.peminjaman.index', [
+                'title' => 'peminjaman',
+                'peminjaman' => Peminjaman::with('user', 'mobil')->get()->sortBy('tgl_mulai_peminjaman')
+            ]);
+        }else{
+            return view('user.peminjaman.index', [
+                'title' => 'peminjaman',
+                'peminjaman' => Peminjaman::with('user', 'mobil')->where('id_user',$user->id_user)->get()->sortBy('tgl_mulai_peminjaman')
+            ]);
+        }
     }
 
     /**
@@ -35,7 +47,19 @@ class PeminjamanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mobil = Mobil::findOrFail($request->id_mobil);
+        $validateData = $request->validate([
+            'id_user'   => 'required|max:255',
+            'id_mobil'   => 'required|max:255',
+            'tgl_mulai_peminjaman' => 'required|max:255',
+            'tgl_selesai_peminjaman'   => 'required|max:255',
+        ]);
+
+        Peminjaman::create($validateData);
+        Mobil::where('id_mobil', $mobil->id_mobil)
+            ->update(['status_mobil'=>'Tidak Tersedia']);
+
+        return redirect('/user/peminjaman')->with('success', 'Berhasil Meminjam Mobil!');
     }
 
     /**
