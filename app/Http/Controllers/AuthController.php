@@ -37,7 +37,12 @@ class AuthController extends Controller
             'role'   => 'required|max:255',
         ]);
 
-        User::create($validateData);
+        $user = User::create($validateData);
+        $lastId = $user->id_user;
+        $password = bcrypt($request->password);
+
+        User::where('id_user', $user->id_user)
+            ->update(['password'=>$password]);
 
         return redirect('/')->with('success', 'Berhasil Mendaftar!');
     }
