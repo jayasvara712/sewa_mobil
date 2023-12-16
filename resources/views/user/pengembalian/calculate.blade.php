@@ -13,7 +13,7 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Edit Data Mobil</h1>
+                <h1>Pengembalian Mobil</h1>
             </div>
 
             <div class="row">
@@ -27,18 +27,6 @@
                                     <label>No Plat Mobil</label>
                                     <input type="text" class="form-control" name="no_plat_mobil"
                                         value="{{ old('no_plat_mobil', $mobil->no_plat_mobil) }}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Tarif Harian</label>
-                                    <input type="number" class="form-control" name="tarif_mobil"
-                                        value="{{ old('tarif_mobil', $mobil->tarif_mobil) }}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Status Mobil</label>
-                                    <input type="text" class="form-control" name="status_mobil"
-                                        value="{{ $mobil->status_mobil }}" readonly>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Simpan</button>

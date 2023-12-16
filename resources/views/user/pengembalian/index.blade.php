@@ -15,6 +15,12 @@
                             <h4>
                                 {{ auth()->user()->role == 'admin' ? 'Data Peminjaman' : 'Daftar Pengembalian Mobil' }}
                             </h4>
+                            @if (auth()->user()->role != 'admin')
+                                <div class="card-header-action">
+                                    <a href="/user/pengembalian/create" class="btn btn-success">
+                                        <i class="fas fa-plus"></i> Pengembalian Mobil</a>
+                                </div>
+                            @endif
                         </div>
 
                         @if (session()->has('success'))

@@ -56,10 +56,6 @@
                                                 <td>
                                                     {{ $val->tgl_selesai_peminjaman }}
                                                 </td>
-                                                <td>
-                                                    <a href="/user/pengembalian/{{ $val->id_peminjaman }}/edit"
-                                                        class="btn btn-warning  btn-sm"><i class="fas fa-check"></i></a>
-                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

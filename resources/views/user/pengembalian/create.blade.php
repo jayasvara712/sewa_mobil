@@ -1,11 +1,8 @@
 @extends('layouts.template')
 @section('main')
-
-    @if ($errors->any())
+    @if (session()->has('errors'))
         <div id="error" style="visibility: hidden">
-            @foreach ($errors->all() as $error)
-                {{ $error }}
-            @endforeach
+            {{ session('errors') }}
         </div>
     @endif
 
@@ -21,7 +18,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <form action="/user/pengembalian" method="post" enctype="multipart/form-data">
+                            <form action="/user/pengembalian/calculate" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label>No Plat Mobil</label>
@@ -32,13 +29,7 @@
                                 <div class="form-group">
                                     <label>Tanggal Pengembalian</label>
                                     <input type="text" class="form-control" name="tgl_pengembalian"
-                                        value="{{ $date }}" readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Total Harga</label>
-                                    <input type="date" class="form-control" name="total_harga"
-                                        value="{{ old('model_mobil') }}" readonly>
+                                        value="{{ date('d-m-Y') }}" readonly>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Simpan</button>
@@ -60,5 +51,4 @@
             2.3.0
         </div>
     </footer>
-
 @endsection

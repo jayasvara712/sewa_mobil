@@ -37,6 +37,22 @@ class PengembalianController extends Controller
      */
     public function create()
     {
+        return view('user.pengembalian.create', [
+            'title' => 'mobil',
+        ]);
+    }
+
+    public function calculate(Request $request){
+        $mobil = Mobil::where('no_plat_mobil', $request->no_plat_mobil)->first();
+        if ($mobil != null) {
+            $peminjaman = Peminjaman::findOrFail($mobil->id_mobil)->first;
+            return view('user.pengembalian.calculate', [
+                'title' => 'pengembalian',
+                'pengembalian' => $peminjaman
+            ]);
+        }else{
+            return back()->with('errors', 'No Plat Mobil tidak ditemukan!');
+        }
     }
 
     /**

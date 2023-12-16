@@ -29,6 +29,7 @@ Route::get('/user', [DashboardController::class,'home'])->middleware('user');
 Route::get('/user/sewa', [PeminjamanController::class,'home'])->middleware('user');
 Route::resource('/user/peminjaman', PeminjamanController::class)->middleware('user');
 Route::resource('/user/pengembalian', PengembalianController::class)->middleware('user');
+Route::post('/user/pengembalian/calculate', [PengembalianController::class,'calculate'])->middleware('user');
 
 //Login
 Route::get('/', [AuthController::class, 'index'])->name('login')->middleware('guest');
