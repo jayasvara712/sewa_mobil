@@ -18,23 +18,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::resource('/', DashboardController::class)->middleware('auth');
+
 //Halaman Admin
-Route::get('/home', [DashboardController::class, 'index'])->middleware('admin');
-Route::get('/admin', [DashboardController::class, 'index'])->middleware('admin');
+// Route::get('/admin', [DashboardController::class, 'index'])->middleware('admin');
 Route::resource('/admin/mobil', MobilController::class)->middleware('admin');
 Route::resource('/admin/peminjaman', PeminjamanController::class)->middleware('admin');
 Route::resource('/admin/pengembalian', PengembalianController::class)->middleware('admin');
 
 // Hlaman User
-Route::get('/home', [DashboardController::class, 'home'])->middleware('user');
-Route::get('/user', [DashboardController::class,'home'])->middleware('user');
+// Route::get('/home', [DashboardController::class, 'home'])->middleware('user');
+// Route::get('/user', [DashboardController::class,'home'])->middleware('user');
 Route::get('/user/sewa', [PeminjamanController::class,'home'])->middleware('user');
 Route::resource('/user/peminjaman', PeminjamanController::class)->middleware('user');
 Route::resource('/user/pengembalian', PengembalianController::class)->middleware('user');
 Route::post('/user/pengembalian/calculate', [PengembalianController::class,'calculate'])->middleware('user');
 
 //Login
-Route::get('/', [AuthController::class, 'index'])->name('login')->middleware('guest');
+// Route::get('/login', [AuthController::class, 'index']);
+Route::get('/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'authenticate']);
 Route::get('/register', [AuthController::class, 'register']);
 Route::post('/registerProcess', [AuthController::class, 'registerProcess']);
