@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Peminjaman;
 use App\Models\Pengembalian;
+use App\Models\Mobil;
 use Illuminate\Http\Request;
 
 class PengembalianController extends Controller
@@ -36,17 +37,6 @@ class PengembalianController extends Controller
      */
     public function create()
     {
-        $fdate = $request->Fdate;
-        $tdate = $request->Tdate;
-        $datetime1 = new DateTime($fdate);
-        $datetime2 = new DateTime($tdate);
-        $interval = $datetime1->diff($datetime2);
-        $days = $interval->format('%a');//now do whatever you like with $days
-        $date = date('d-m-Y');
-        return view('user.pengembalian.create', [
-            'title' => 'pengembalian',
-            'date'  => $date,
-        ]);
     }
 
     /**
@@ -66,9 +56,13 @@ class PengembalianController extends Controller
      * @param  \App\Models\Pengembalian  $pengembalian
      * @return \Illuminate\Http\Response
      */
-    public function show(Pengembalian $pengembalian)
+    public function show($id)
     {
-        //
+        $peminjaman = Mobil::findOrFail($id);
+        return view('user.pengembalian.edit', [
+            'title' => 'pengembalian',
+            'pengembalian' => $pengembalian
+        ]);
     }
 
     /**
@@ -77,9 +71,15 @@ class PengembalianController extends Controller
      * @param  \App\Models\Pengembalian  $pengembalian
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pengembalian $pengembalian)
+    public function edit($id)
     {
-        //
+        $peminjaman = Peminjaman::findOrFail($id);
+        $mobil = Mobil::findOrFail($id);
+        return view('user.pengembalian.edit', [
+            'title' => 'pengembalian',
+            'pengembalian' => $pengembalian,
+            'mobil' => $mobil,
+        ]);
     }
 
     /**

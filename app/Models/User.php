@@ -26,7 +26,8 @@ class User extends Authenticatable
         'nama',
         'alamat',
         'no_telp',
-        'no_sim'
+        'no_sim',
+        'role'
     ];
 
     /**

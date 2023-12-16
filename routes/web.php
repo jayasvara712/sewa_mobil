@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/admin', [DashboardController::class, 'index'])->middleware('admin');
 Route::resource('/admin/mobil', MobilController::class)->middleware('admin');
 Route::resource('/admin/peminjaman', PeminjamanController::class)->middleware('admin');
+Route::resource('/admin/pengembalian', PengembalianController::class)->middleware('admin');
 
 // Hlaman User
 Route::get('/user', [DashboardController::class,'home'])->middleware('user');
@@ -32,4 +33,6 @@ Route::resource('/user/pengembalian', PengembalianController::class)->middleware
 //Login
 Route::get('/', [AuthController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'authenticate']);
+Route::get('/register', [AuthController::class, 'register']);
+Route::post('/registerProcess', [AuthController::class, 'registerProcess']);
 Route::post('/logout', [AuthController::class, 'logout']);

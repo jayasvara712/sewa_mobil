@@ -57,13 +57,8 @@
                                                     {{ $val->tgl_selesai_peminjaman }}
                                                 </td>
                                                 <td>
-                                                    <form action="/user/pengembalian/" method="post"
-                                                        enctype="multipart/form-data">
-                                                        @csrf
-                                                        <input type="hidden" name="id_peminjaman"
-                                                            value="{{ $val->id_peminjaman }}">
-                                                        <button type="submit" class="btn btn-primary">Kembalikan</button>
-                                                    </form>
+                                                    <a href="/user/pengembalian/{{ $val->id_peminjaman }}/edit"
+                                                        class="btn btn-warning  btn-sm"><i class="fas fa-check"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
