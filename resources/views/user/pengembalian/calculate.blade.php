@@ -20,13 +20,32 @@
                 <div class="col-12 col-md-12 col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="/admin/mobil/{{ $mobil->id_mobil }}" method="post" enctype="multipart/form-data">
-                                @method('put')
+                            <form action="/user/pengembalian/" method="post" enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" name="id_user" value="{{ $id_user }}">
+                                <input type="hidden" name="id_mobil" value="{{ $mobil->id_mobil }}">
                                 <div class="form-group">
                                     <label>No Plat Mobil</label>
                                     <input type="text" class="form-control" name="no_plat_mobil"
-                                        value="{{ old('no_plat_mobil', $mobil->no_plat_mobil) }}">
+                                        value="{{ old('no_plat_mobil', $mobil->no_plat_mobil) }}" readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Tanggal Pengembalian</label>
+                                    <input type="text" class="form-control" name="tgl_pengembalian"
+                                        value="{{ old('tgl_pengembalian', $tgl_pengembalian) }}" readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Lama Sewa</label>
+                                    <input type="text" class="form-control" name="lama_sewa"
+                                        value="{{ old('lama_sewa', $lama_sewa) }}" readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Total Bayar</label>
+                                    <input type="text" class="form-control" name="total_bayar"
+                                        value="{{ old('total_bayar', $total_bayar) }}" readonly>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Simpan</button>
