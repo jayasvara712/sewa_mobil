@@ -39,7 +39,7 @@ class PengembalianController extends Controller
     public function create()
     {
         return view('user.pengembalian.create', [
-            'title' => 'mobil',
+            'title' => 'pengembalian',
         ]);
     }
 

@@ -29,7 +29,7 @@
                                 <div class="form-group">
                                     <label>Tanggal Pengembalian</label>
                                     <input type="text" class="form-control" name="tgl_pengembalian"
-                                        value="{{ date('d-m-Y') }}" readonly>
+                                        value="{{ date('Y-m-d') }}" readonly>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Simpan</button>
