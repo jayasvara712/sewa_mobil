@@ -74,10 +74,10 @@ class PengembalianController extends Controller
     public function edit($id)
     {
         $peminjaman = Peminjaman::findOrFail($id);
-        $mobil = Mobil::findOrFail($id);
+        $mobil = Mobil::findOrFail($peminjaman->id_mobil);
         return view('user.pengembalian.edit', [
             'title' => 'pengembalian',
-            'pengembalian' => $pengembalian,
+            'peminjaman' => $peminjaman,
             'mobil' => $mobil,
         ]);
     }

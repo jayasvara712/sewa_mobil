@@ -13,7 +13,7 @@ class Peminjaman extends Model
     protected $primaryKey = 'id_peminjaman';
 
     protected $fillable = [
-        'id_peminjaman', 'id_user', 'id_mobil', 'tgl_mulai_peminjaman', 'tgl_selesai_peminjaman'
+        'id_peminjaman', 'id_user', 'id_mobil', 'tgl_mulai_peminjaman', 'tgl_selesai_peminjaman',
     ];
 
     public function user()

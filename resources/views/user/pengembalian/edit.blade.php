@@ -24,18 +24,6 @@
                                 @method('put')
                                 @csrf
                                 <div class="form-group">
-                                    <label>Merek Mobil</label>
-                                    <input type="text" class="form-control" name="merek_mobil"
-                                        value="{{ old('merek_mobil', $mobil->merek_mobil) }}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Model Mobil</label>
-                                    <input type="text" class="form-control" name="model_mobil"
-                                        value="{{ old('model_mobil', $mobil->model_mobil) }}">
-                                </div>
-
-                                <div class="form-group">
                                     <label>No Plat Mobil</label>
                                     <input type="text" class="form-control" name="no_plat_mobil"
                                         value="{{ old('no_plat_mobil', $mobil->no_plat_mobil) }}">
