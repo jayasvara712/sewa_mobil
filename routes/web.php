@@ -19,12 +19,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Halaman Admin
+Route::get('/home', [DashboardController::class, 'index'])->middleware('admin');
 Route::get('/admin', [DashboardController::class, 'index'])->middleware('admin');
 Route::resource('/admin/mobil', MobilController::class)->middleware('admin');
 Route::resource('/admin/peminjaman', PeminjamanController::class)->middleware('admin');
 Route::resource('/admin/pengembalian', PengembalianController::class)->middleware('admin');
 
 // Hlaman User
+Route::get('/home', [DashboardController::class, 'home'])->middleware('user');
 Route::get('/user', [DashboardController::class,'home'])->middleware('user');
 Route::get('/user/sewa', [PeminjamanController::class,'home'])->middleware('user');
 Route::resource('/user/peminjaman', PeminjamanController::class)->middleware('user');

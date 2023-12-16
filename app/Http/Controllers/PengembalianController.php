@@ -47,29 +47,34 @@ class PengembalianController extends Controller
         $mobil = Mobil::where('no_plat_mobil', $request->no_plat_mobil)->first();
         if ($mobil != null) {
             $peminjaman = Peminjaman::where('id_mobil',$mobil->id_mobil)->first();
+            if($peminjaman->id_user == auth()->user()->id_user){
 
-            // count days
-            $fdate = $peminjaman->tgl_mulai_peminjaman;
-            $tdate = $peminjaman->tgl_selesai_peminjaman;
-            $datetime1 = new DateTime($fdate);
-            $datetime2 = new DateTime($tdate);
-            $interval = $datetime1->diff($datetime2);
-            $days = $interval->format('%a');
+                // count days
+                $fdate = $peminjaman->tgl_mulai_peminjaman;
+                $tdate = $peminjaman->tgl_selesai_peminjaman;
+                $datetime1 = new DateTime($fdate);
+                $datetime2 = new DateTime($tdate);
+                $interval = $datetime1->diff($datetime2);
+                $days = $interval->format('%a');
 
-            $lama_sewa = $days;
+                $lama_sewa = $days;
 
-            $total_bayar = $lama_sewa * $mobil->tarif_mobil;
+                $total_bayar = $lama_sewa * $mobil->tarif_mobil;
 
-            $id_user = auth()->user()->id_user;
-            return view('user.pengembalian.calculate', [
-                'title' => 'pengembalian',
-                'peminjaman' => $peminjaman,
-                'mobil' => $mobil,
-                'lama_sewa' => $lama_sewa,
-                'total_bayar' => $total_bayar,
-                'tgl_pengembalian' => $request->tgl_pengembalian,
-                'id_user'   => $id_user,
-            ]);
+                $id_user = auth()->user()->id_user;
+                return view('user.pengembalian.calculate', [
+                    'title' => 'pengembalian',
+                    'peminjaman' => $peminjaman,
+                    'mobil' => $mobil,
+                    'lama_sewa' => $lama_sewa,
+                    'total_bayar' => $total_bayar,
+                    'tgl_pengembalian' => $request->tgl_pengembalian,
+                    'id_user'   => $id_user,
+                ]);
+            }else{
+                return back()->with('errors', 'Mobil dipinjam oleh orang lain!');
+            }
+
         }else{
             return back()->with('errors', 'No Plat Mobil tidak ditemukan!');
         }
