@@ -13,13 +13,20 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('admin.index', [
-            'title'         => 'Dashboard',
-            'user'          => User::count(),
-            'mobil'         => Mobil::count(),
-            'peminjaman'    => Peminjaman::count(),
-            'pengembalian'  => Pengembalian::count(),
-        ]);
+        if(auth()->user()->role =='admin'){
+            return view('admin.index', [
+                'title'         => 'Dashboard',
+                'user'          => User::count(),
+                'mobil'         => Mobil::count(),
+                'peminjaman'    => Peminjaman::count(),
+                'pengembalian'  => Pengembalian::count(),
+            ]);
+        }else{
+            return view('user.index', [
+                'title'         => 'Dashboard',
+                'mobil'         => Mobil::all(),
+            ]);
+        }
     }
 
     public function home()

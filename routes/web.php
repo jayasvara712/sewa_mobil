@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::resource('/', DashboardController::class)->middleware('auth');
 
 //Halaman Admin
-// Route::get('/admin', [DashboardController::class, 'index'])->middleware('admin');
+Route::get('/admin', [DashboardController::class, 'index'])->middleware('admin');
 Route::resource('/admin/mobil', MobilController::class)->middleware('admin');
 Route::resource('/admin/peminjaman', PeminjamanController::class)->middleware('admin');
 Route::resource('/admin/pengembalian', PengembalianController::class)->middleware('admin');
